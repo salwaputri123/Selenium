@@ -37,7 +37,7 @@ try:
     WebDriverWait(driver, 40).until(
         EC.visibility_of_element_located((By.XPATH, "//*[contains(text(),'Selamat Datang') or contains(text(),'Dashboard')]"))
     )
-    print("✅ Login berhasil!")
+    print("Login berhasil!")
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     time.sleep(3)
@@ -46,7 +46,7 @@ try:
     print("Membuka halaman Data Pokok Guru...")
     driver.get("https://appv3.stagingquamuslms.com/school/teacher")
     WebDriverWait(driver, 30).until(EC.visibility_of_element_located((By.XPATH, "//*[contains(text(),'Tambah Data')]")))
-    print("✅ Halaman Data Pokok Guru terbuka.")
+    print("Halaman Data Pokok Guru terbuka.")
 
     # ======== VALIDASI DENGAN SEARCH ========
     print("Melakukan pencarian data guru yang baru ditambahkan...")
@@ -61,7 +61,7 @@ try:
     WebDriverWait(driver, 10).until(
         EC.visibility_of_element_located((By.XPATH, "//td[contains(., 'Budi Santoso')]"))
     )
-    print("✅ Data 'Budi Santoso' ditemukan di hasil pencarian!")
+    print("Data 'Budi Santoso' ditemukan di hasil pencarian!")
 
     # ======== BUAT AKUN GURU ========
     print("Membuka menu Aksi → Buat Akun...")
@@ -82,24 +82,24 @@ try:
         EC.element_to_be_clickable((By.XPATH, "//span[text()='Ya, Buat Akun']"))
     )
     confirm_button.click()
-    print("✅ Klik 'Ya, Buat Akun' berhasil.")
+    print("Klik 'Ya, Buat Akun' berhasil.")
 
     # ======== VALIDASI AKHIR ========
     print("Memeriksa pesan sukses...")
     WebDriverWait(driver, 10).until(
         EC.visibility_of_element_located((By.XPATH, "//*[contains(text(), 'berhasil') and contains(text(), 'akun')]"))
     )
-    print("✅ Akun guru berhasil dibuat!")
+    print("Akun guru berhasil dibuat!")
 
     ss_name = f"success_buat_akun_{timestamp}.png"
     driver.save_screenshot(ss_name)
-    print(f"📸 Screenshot disimpan: {ss_name}")
+    print(f"Screenshot disimpan: {ss_name}")
 
 except Exception as e:
-    print(f"❌ Terjadi error: {e}")
+    print(f"Terjadi error: {e}")
     fail_name = f"error_{datetime.now().strftime('%Y%m%d_%H%M%S')}.png"
     driver.save_screenshot(fail_name)
-    print(f"📸 Screenshot error: {fail_name}")
+    print(f"Screenshot error: {fail_name}")
 
 finally:
     print("Menutup browser...")
