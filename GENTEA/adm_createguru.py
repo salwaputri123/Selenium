@@ -13,12 +13,12 @@ options = webdriver.ChromeOptions()
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
 try:
-    print("🔹 Membersihkan session lama...")
+    print("Membersihkan session lama...")
     driver.delete_all_cookies()
     driver.get("about:blank")
     time.sleep(1)
 
-    print("🔹 Membuka halaman login...")
+    print("Membuka halaman login...")
     driver.get("https://appv3.stagingquamuslms.com/login?redirectUrl=%2F")
     driver.maximize_window()
 
@@ -27,7 +27,7 @@ try:
         EC.presence_of_element_located((By.XPATH, "//input[@data-path='code']"))
     )
 
-    print("🔹 Mengisi form login...")
+    print("Mengisi form login...")
     code = driver.find_element(By.XPATH, "//input[@data-path='code']")
     user = driver.find_element(By.XPATH, "//input[@data-path='username']")
     pw = driver.find_element(By.XPATH, "//input[@data-path='password']")
@@ -43,7 +43,7 @@ try:
     time.sleep(0.5)
     pw.send_keys("83630")
 
-    print("🔹 Klik tombol Submit...")
+    print("Klik tombol Submit...")
     driver.find_element(By.XPATH, "//button[@type='submit']").click()
 
     print("Menunggu dashboard terbuka...")
@@ -53,19 +53,19 @@ try:
             EC.visibility_of_element_located((By.XPATH, "//*[contains(text(),'Data Pokok')]")),
         )
     )
-    print("✅ Login berhasil!\n")
+    print("Login berhasil!\n")
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     time.sleep(3)
 
     # === Buka halaman Data Guru lewat navigasi ===
-    print("🔹 Membuka menu Data Pokok...")
+    print("Membuka menu Data Pokok...")
     menu_data_pokok = WebDriverWait(driver, 20).until(
         EC.element_to_be_clickable((By.XPATH, "//*[contains(text(),'Data Pokok')]"))
     )
     driver.execute_script("arguments[0].click();", menu_data_pokok)
     time.sleep(2)
 
-    print("🔹 Membuka submenu Guru...")
+    print("Membuka submenu Guru...")
     submenu_guru = WebDriverWait(driver, 20).until(
         EC.element_to_be_clickable((By.XPATH, "//*[contains(text(),'Guru')]"))
     )
@@ -76,7 +76,7 @@ try:
     WebDriverWait(driver, 30).until(
         EC.element_to_be_clickable((By.XPATH, "//span[contains(text(),'Tambah Data')]"))
     )
-    print("✅ Halaman Data Guru berhasil terbuka!\n")
+    print("Halaman Data Guru berhasil terbuka.\n")
 
     # === Klik tombol Tambah Data ===
     print("Klik tombol Tambah Data...")
@@ -129,7 +129,7 @@ try:
         EC.visibility_of_element_located((By.XPATH, "//button[.//span[text()='Simpan']]"))
     )
 
-    print("✅ Data guru berhasil disimpan!")
+    print("Data guru berhasil disimpan!")
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     driver.save_screenshot(f"guru_disimpan_{timestamp}.png")
