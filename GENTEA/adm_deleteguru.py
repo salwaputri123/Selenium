@@ -40,7 +40,7 @@ try:
     WebDriverWait(driver, 40).until(
         EC.visibility_of_element_located((By.XPATH, "//*[contains(text(),'Selamat Datang') or contains(text(),'Dashboard')]"))
     )
-    print("✅ Login berhasil!")
+    print("Login berhasil!")
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     time.sleep(3)
